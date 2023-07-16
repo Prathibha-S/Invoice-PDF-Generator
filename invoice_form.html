@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice Generator</title>
+    <style>
+        body{
+            background-image: url('static/inv.jpg');
+        }
+        #title {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(243, 238, 238, 0.934);
+            font-weight: bold;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 1px #000, 
+               3px 3px 5px rgb(10, 13, 16); 
+        }
+        
+        h1{
+            color:rgb(8, 8, 112);
+        }
+        input[type="text"]{
+            background-color: rgb(228, 235, 250);
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            width: 250px;
+            margin-bottom: 20px;
+        }
+        .label {
+            color: rgb(7, 7, 42);
+            font-weight: bold;
+            /* Add more styles as needed */
+        }
+        .btnrem{
+            padding:10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            background:transparent;
+            color:rgb(254, 250, 250);
+            font-weight: 600;
+            transition: all .3s ease-out;
+            border: 2px solid rgb(247, 244, 244);
+            font-size: 13px;
+        }
+        .btnrem:hover{
+            background-color: rgb(43, 43, 122);
+            color: rgb(249, 239, 239);
+        }
+        .btn{
+            padding:10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            background:transparent;
+            color:rgb(236, 236, 242);
+            font-weight: 600;
+            transition: all .3s ease-out;
+            border: 2px solid white;
+            font-size: 15px;
+        }
+        .btn:hover{
+            background-color: rgb(43, 43, 122);
+            color: rgb(249, 239, 239);
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1 id = "title">Invoice Generator</h1>
+    <form action="/generate-invoice" method="POST" enctype="multipart/form-data" id="invoice-form">
+        <label for="invnumber" class="label">Invoice No:</label>
+        <input type="text" name="invnumber" required>
+        <br>
+        <div id="items-container">
+            <div class="item">
+                <label for="item" class="label">Item:</label>
+                <input type="text" class="input" name="item[]" required>
+                <label for="quantity" class="label">Quantity:</label>
+                <input type="text" class="input" name="quantity[]" required>
+                <label for="rate" class="label">Rate:</label>
+                <input type="text" class="input" name="rate[]" required>
+                <button type="button" class="btnrem" style="margin-left: 10px;">Remove</button>
+            </div>
+        </div>
+        <button type="button" id="add-item-btn" class="btn">Add Item</button>
+        <button type="submit" class="btn" style="margin-left: 10px;">Generate Invoice</button>
+    </form>
+    
+    <script>
+        document.getElementById("add-item-btn").addEventListener("click", function() {
+            var itemsContainer = document.getElementById("items-container");
+            var newItem = document.createElement("div");
+            newItem.className = "item";
+            newItem.innerHTML = `
+                <label for="item" class="label">Item:</label>
+                <input type="text" class="input" name="item[]" required>
+                <label for="quantity" class="label">Quantity:</label>
+                <input type="text" class="input" name="quantity[]" required>
+                <label for="rate" class="label">Rate:</label>
+                <input type="text" class="input" name="rate[]" required>
+                <button type="button" class="btnrem">Remove</button>
+            `;
+            itemsContainer.appendChild(newItem);
+        });
+
+        document.addEventListener("click", function(event) {
+            if (event.target && event.target.classList.contains("remove-item-btn")) {
+                event.target.parentNode.remove();
+            }
+        });
+    </script>
+    </center>
+</body>
+</html>
