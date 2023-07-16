@@ -3,4 +3,5 @@ An Invoice PDF generator web application developed in Python using Flask framewo
 
 # Interface
 The web application interface is provided as below:
+
 ![Screenshot (93)](https://github.com/Prathibha-S/Invoice-PDF-Generator/assets/95700454/80604e45-e1c1-4d42-b473-354d86314e4a)
